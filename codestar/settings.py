@@ -172,3 +172,9 @@ LOGGING = {
         # The 'django' logger catches framework-level events,
         # including unhandled exceptions in views (like our 500 error).
         'django': {
+            'handlers': ['console'],  # send these logs to the console handler above
+            'level': 'ERROR',         # only log ERROR and above (ignores INFO/DEBUG noise)
+            'propagate': True,        # let messages also bubble up to any parent loggers
+        },
+    },
+}
