@@ -57,6 +57,12 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # WhiteNoise serves static files directly from Django in production.
+    # It MUST go right after SecurityMiddleware and before everything else,
+    # so it can intercept static file requests early and serve them efficiently.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -141,6 +147,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Absolute filesystem path where `collectstatic` will gather ALL static files
+# (your app's + Django admin's + any installed package's) into one folder,
+# ready to be served in production.
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Tells Django (4.2+) which storage engine to use for static files.
+# CompressedManifestStaticFilesStorage:
+#   - Compresses files (gzip) for faster delivery
+#   - Adds a hash to each filename (e.g. style.a1b2c3.css) so browsers
+#     cache files safely and reliably bust the cache when files change
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
