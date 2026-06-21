@@ -146,3 +146,29 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Configure Django's logging so that error tracebacks are printed
+# to the console (stdout) instead of being silently dropped or
+# emailed to admins (which isn't configured here).
+# Heroku captures anything written to stdout/stderr and shows it
+# in `heroku logs`, so this makes 500 errors visible there.
+LOGGING = {
+    'version': 1,  # required key, always 1 for Django's logging config schema
+
+    # Keep Django's default loggers (e.g. for security, requests) active
+    # instead of disabling them when we define our own.
+    'disable_existing_loggers': False,
+
+    'handlers': {
+        # A handler defines WHERE log messages go.
+        # 'console' sends them to stdout/stderr, which Heroku logs.
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+
+    'loggers': {
+        # The 'django' logger catches framework-level events,
+        # including unhandled exceptions in views (like our 500 error).
+        'django': {
