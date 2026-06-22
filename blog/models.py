@@ -43,5 +43,7 @@ class Comment(models.Model):
     class Meta:
         ordering = ["-created_on"]
 
+    challenge = models.FloatField(default= 3.0)
+
     def __str__(self):
         return f"Comment  {self.body}  by  {self.author}"
