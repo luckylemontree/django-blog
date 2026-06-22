@@ -45,7 +45,7 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # environment and enable DEBUG so Django shows detailed tracebacks
 # instead of a generic 500 page (useful while developing locally).
 if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
-    DEBUG = True
+    DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
