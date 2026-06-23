@@ -45,7 +45,7 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # environment and enable DEBUG so Django shows detailed tracebacks
 # instead of a generic 500 page (useful while developing locally).
 if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
-    DEBUG = False
+    DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_summernote',
     'blog',
 ]
 
@@ -165,11 +166,24 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 #   - Compresses files (gzip) for faster delivery
 #   - Adds a hash to each filename (e.g. style.a1b2c3.css) so browsers
 #     cache files safely and reliably bust the cache when files change
+# NOTE: defining STORAGES replaces Django's defaults entirely, so the
+# "default" entry (used for FileField/media uploads, e.g. by
+# django-summernote) MUST be included alongside "staticfiles" — otherwise
+# Django raises InvalidStorageError: Could not find config for 'default'.
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# Media files (user-uploaded content, e.g. images added via the Summernote
+# editor). MEDIA_ROOT is the folder on disk where uploads are saved;
+# MEDIA_URL is the URL prefix the browser uses to request them.
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

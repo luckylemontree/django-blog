@@ -16,9 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),     
-    path("", include("blog.urls"), name="blog-urls"),  
+    path('admin/', admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
+    path("", include("blog.urls"), name="blog-urls"),
 ]
+
+# During local development (DEBUG=True) let the dev server serve uploaded
+# media files. In production this is handled elsewhere (e.g. WhiteNoise /
+# Cloudinary), so this block is skipped.
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
