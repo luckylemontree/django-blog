@@ -49,7 +49,7 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # environment and enable DEBUG so Django shows detailed tracebacks
 # instead of a generic 500 page (useful while developing locally).
 if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
-    DEBUG = True
+    DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -163,7 +163,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 # Absolute filesystem path where `collectstatic` will gather ALL static files
 # (your app's + Django admin's + any installed package's) into one folder,
 # ready to be served in production.
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Tells Django (4.2+) which storage engine to use for static files.
 # CompressedManifestStaticFilesStorage:
