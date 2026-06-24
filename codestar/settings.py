@@ -37,6 +37,11 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # If a local `env.py` file exists we assume this is a development
 # environment and enable DEBUG so Django shows detailed tracebacks
 # instead of a generic 500 page (useful while developing locally).
+
+# environment and enable DEBUG. This serves static files directly from
+# STATICFILES_DIRS (no manifest lookup), so you don't need to run
+# `collectstatic` after every static-file change, and Django shows
+# detailed tracebacks instead of a generic 500 page.
 if os.path.isfile(os.path.join(BASE_DIR, "env.py")):
     DEBUG = False
 
