@@ -23,9 +23,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    path("about/", include("about.urls"), name="about-url"),
-    path("blog/", include("blog.urls"), name="blog-url"),
-    path("", include("blog.urls"), name="blog-url"),
+   path("about/", include("about.urls"), name="about-urls"),
+    path("blog/", include("blog.urls"), name="blog-urls"),
+    path("", include("blog.urls"), name="blog-urls"),
 ]
 
 # During local development (DEBUG=True) let the dev server serve uploaded
