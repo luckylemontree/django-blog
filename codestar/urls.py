@@ -26,6 +26,7 @@ urlpatterns = [
    path("about/", include("about.urls"), name="about-urls"),
     path("blog/", include("blog.urls"), name="blog-urls"),
     path("", include("blog.urls"), name="blog-urls"),
+    path("accounts/", include("allauth.urls")),
 ]
 
 # During local development (DEBUG=True) let the dev server serve uploaded

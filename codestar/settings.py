@@ -57,10 +57,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #user authentication
+    'django.contrib.sites',# a built-in Django package
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'django_summernote',
     'blog',
     'about',
 ]
+
+#user authentication; setting the site and home page after login and logout
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,7 +87,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    #user authentication; adds additional functionality 
+    'allauth.account.middleware.AccountMiddleware',
 ]
+
+#user authentication; not using email verification in this project
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ROOT_URLCONF = 'codestar.urls'
 
