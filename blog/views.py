@@ -39,7 +39,6 @@ def post_detail(request, slug):
 
     if request.method == "POST":
 
-        print("Received a POST request")
 
         comment_form = CommentForm(data=request.POST)
 
@@ -54,8 +53,7 @@ def post_detail(request, slug):
            )
     #For the commnet form
     comment_form = CommentForm()
-    
-    print("About to render template")
+   
 
     return render(
         request,
