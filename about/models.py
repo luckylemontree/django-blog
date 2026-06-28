@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -10,6 +10,8 @@ class About(models.Model):
     content = models.TextField()   
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)   
+
+    profile_image = CloudinaryField('image', default='placeholder')
   
     class Meta:
         ordering = ["created_on"]
