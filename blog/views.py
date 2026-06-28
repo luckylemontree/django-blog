@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
 from django.http import HttpResponseRedirect
-from .models import Post,Comment
 from django.shortcuts import render, get_object_or_404, reverse
-from .forms import CommentForm
 from django.contrib import messages
+from .models import Post,Comment
+from .forms import CommentForm
+
 
 #from .models import Event
 
