@@ -24,7 +24,7 @@ class TestCollaborateForm(TestCase):
         self.assertFalse(form.is_valid(), msg="Form is not valid")
 
 
-     def test_name_is_required(self):
+    def test_name_is_required(self):
         """Test for the 'name' field"""
         form = CollaborateForm({
             'name': '',
